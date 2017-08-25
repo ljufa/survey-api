@@ -1,0 +1,44 @@
+version: '2.1'
+services:
+  survey-registry:
+    build: survey-registry
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  survey-gateway:
+    build: survey-gateway
+    restart: always
+    depends_on:
+      survey-registry:
+        condition: service_started
+    ports:
+      - 80:4000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  polldefinition-service:
+    build: polldefinition-service
+    restart: always
+    depends_on:
+      survey-registry:
+        condition: service_started
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  polldefinition-mongodb:
+    environment:
+      MONGODB_PASSWORD: password
+    build: mongodb
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+

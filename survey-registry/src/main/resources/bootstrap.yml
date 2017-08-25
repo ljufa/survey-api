@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: survey-registry
+server:
+  port: 8761
+
+eureka:
+  instance:
+    prefer-ip-address: false
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    server:
+      waitTimeInMsWhenSyncEmpty: 0

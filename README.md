@@ -1,3 +1,12 @@
+# Requirements #
+
+ - add/edit/delete questions, answers
+ - read a list of all questions
+ - read a question with all answers
+ - respond to a survey
+ - read the result for a particular question showing the total number of responses and distribution among the 
+   possible answers in percent.
+   
 # Architectual Decisions #
 
 From required functionalities I identified three groups of usage types:
@@ -23,3 +32,7 @@ In that case data copy must be used in readonly mode.
 Use synchronous service communication becuse of better cloud tools support (spring streams  cloud or spring 5 reactive is still immature)
 ## Decision #5 ##
 Use eureka for service discovery and ribbon for client side load balancing
+## Decision #6 ##
+Implement load balancing, service discovery, circuit breaker and other MS deployment patterns in application itself by use of spring-cloud.
+Alternative approach would be container orchestration platform
+  

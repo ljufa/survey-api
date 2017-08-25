@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: polldefinition-service
+  data:
+    mongodb:
+      host: polldefinition-mongodb
+      username: user
+      password: password
+      database: survey
+      port: 27017
+
+server:
+  context-path: /definition
+  port: 7878

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: survey-gateway
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+  routes:
+    polldefinition-service:
+        path: /definition/**
+        serviceId: polldefinition-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+server:
+  port: 4000

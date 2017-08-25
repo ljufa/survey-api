@@ -13,6 +13,8 @@
         <module>polldefinition-service</module>
         <module>pollexecution-service</module>
         <module>pollstatistics-service</module>
+        <module>survey-gateway</module>
+        <module>survey-registry</module>
     </modules>
 
 

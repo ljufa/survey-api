@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/pollexecution-service/pollexecution-service.iml" filepath="$PROJECT_DIR$/pollexecution-service/pollexecution-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/pollstatistics-service/pollstatistics-service.iml" filepath="$PROJECT_DIR$/pollstatistics-service/pollstatistics-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/survey.iml" filepath="$PROJECT_DIR$/survey.iml" />
+      <module fileurl="file://$PROJECT_DIR$/survey-gateway/survey-gateway.iml" filepath="$PROJECT_DIR$/survey-gateway/survey-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/survey-registry/survey-registry.iml" filepath="$PROJECT_DIR$/survey-registry/survey-registry.iml" />
     </modules>
   </component>
 </project>
