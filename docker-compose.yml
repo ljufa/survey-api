@@ -3,8 +3,6 @@ services:
   survey-registry:
     build: survey-registry
     restart: always
-#    ports:
-#      - 8761:8761
     logging:
       options:
         max-size: "10m"
@@ -26,8 +24,6 @@ services:
   polldefinition-service:
     build: polldefinition-service
     restart: always
-#    ports:
-#      - 7878:7878
     depends_on:
       survey-registry:
         condition: service_started
@@ -37,14 +33,10 @@ services:
         max-file: "10"
 
   polldefinition-mongodb:
-    environment:
-      MONGODB_PASSWORD: password
     build: mongodb
-    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=survey
     ports:
       - 27017:27017
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-

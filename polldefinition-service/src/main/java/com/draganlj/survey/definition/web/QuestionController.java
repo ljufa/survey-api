@@ -43,7 +43,9 @@ public class QuestionController {
     public Question getQuestionWithAnswers(@PathVariable Integer questionId) {
         log.debug("service:"+ service );
         log.debug("questionId:"+ questionId);
-        return service.getQuestion(questionId, true);
+        Question question = service.getQuestion(questionId, true);
+        log.debug("question:{1}",question);
+        return question;
     }
 
     @GetMapping("/")

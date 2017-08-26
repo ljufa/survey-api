@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
-public class SimpleSurveyDefnitionService implements SurveyDefinitionService {
+public class DefaultSurveyDefnitionService implements SurveyDefinitionService {
 
     @Autowired
     private QuestionRepository questionRepository;
