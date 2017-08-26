@@ -18,3 +18,7 @@ eureka:
 server:
   context-path: /definition
   port: 7878
+
+logging:
+  level:
+    com.draganlj.survey: DEBUG

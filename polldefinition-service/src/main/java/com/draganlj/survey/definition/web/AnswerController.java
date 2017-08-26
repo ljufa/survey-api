@@ -4,6 +4,7 @@ import com.draganlj.survey.definition.model.Answer;
 import com.draganlj.survey.definition.service.SurveyDefinitionService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class AnswerController {
 
+    @Autowired
     private SurveyDefinitionService service;
 
     @PostMapping("/")

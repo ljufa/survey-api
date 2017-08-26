@@ -4,6 +4,8 @@ import com.draganlj.survey.definition.model.Question;
 import com.draganlj.survey.definition.service.SurveyDefinitionService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +16,9 @@ import java.util.List;
 @RequestMapping("/{surveyId}/questions")
 @AllArgsConstructor
 @NoArgsConstructor
+@Slf4j
 public class QuestionController {
-
+@Autowired
     private SurveyDefinitionService service;
 
     @PostMapping("/")
@@ -38,6 +41,8 @@ public class QuestionController {
 
     @GetMapping("/{questionId}")
     public Question getQuestionWithAnswers(@PathVariable Integer questionId) {
+        log.debug("service:"+ service );
+        log.debug("questionId:"+ questionId);
         return service.getQuestion(questionId, true);
     }
 

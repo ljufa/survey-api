@@ -12,5 +12,6 @@ public class Survey {
     private Integer id;
     private String author;
     private Date createDate;
-    private List<Answer> answers;
+    private String surveyTitle;
+    private List<Question> questions;
 }

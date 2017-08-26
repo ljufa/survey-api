@@ -1,87 +1,66 @@
-
-
 print('dump start');
-
 db.survey.update(
-    { "_id": "demo" },
     {
-    "_id": "demo",
-    "lastSeen": new Date(),
-    "note": "demo note",
-    "expenses": [
+    "id": "1",
+    "createDate": new Date(),
+    "author": "Dragan",
+    "surveyTitle":"IT Survey",
+    "questions": [
         {
-            "amount": 1300,
-            "currency": "USD",
-            "icon": "home",
-            "period": "MONTH",
-            "title": "Rent"
+            "id": 1,
+            "questionText":"What is your favorite IDE",
+            "answers":[
+                {
+                    "id":1,
+                    "answerText":"Eclipse"
+                },
+                {
+                    "id":2,
+                    "answerText":"IntelliJ Idea"
+                },
+                 {
+                     "id":3,
+                     "answerText":"NetBeans"
+                 }
+            ]
         },
         {
-            "amount": 120,
-            "currency": "USD",
-            "icon": "utilities",
-            "period": "MONTH",
-            "title": "Utilities"
+            "id": 2,
+            "questionText":"What is your favorite programming language",
+            "answers":[
+                {
+                    "id":1,
+                    "answerText":"Java"
+                },
+                {
+                    "id":2,
+                    "answerText":"Scala"
+                },
+                 {
+                     "id":3,
+                     "answerText":"Kotlin"
+                 }
+            ]
         },
         {
-            "amount": 20,
-            "currency": "USD",
-            "icon": "meal",
-            "period": "DAY",
-            "title": "Meal"
-        },
-        {
-            "amount": 240,
-            "currency": "USD",
-            "icon": "gas",
-            "period": "MONTH",
-            "title": "Gas"
-        },
-        {
-            "amount": 3500,
-            "currency": "EUR",
-            "icon": "island",
-            "period": "YEAR",
-            "title": "Vacation"
-        },
-        {
-            "amount": 30,
-            "currency": "EUR",
-            "icon": "phone",
-            "period": "MONTH",
-            "title": "Phone"
-        },
-        {
-            "amount": 700,
-            "currency": "USD",
-            "icon": "sport",
-            "period": "YEAR",
-            "title": "Gym"
+             "id": 3,
+             "questionText":"What is your favorite OS",
+             "answers":[
+                 {
+                     "id":1,
+                     "answerText":"Linux"
+                 },
+                 {
+                     "id":2,
+                     "answerText":"Windows"
+                 },
+                  {
+                      "id":3,
+                      "answerText":"MAC OS"
+                  }
+             ]
         }
-    ],
-    "incomes": [
-        {
-            "amount": 42000,
-            "currency": "USD",
-            "icon": "wallet",
-            "period": "YEAR",
-            "title": "Salary"
-        },
-        {
-            "amount": 500,
-            "currency": "USD",
-            "icon": "edu",
-            "period": "MONTH",
-            "title": "Scholarship"
-        }
-    ],
-    "saving": {
-            "amount": 5900,
-            "capitalization": false,
-            "currency": "USD",
-            "deposit": true,
-            "interest": 3.32
-        }
+    ]
     },
     { upsert: true }
 );
