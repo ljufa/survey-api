@@ -5,6 +5,8 @@ spring:
 ribbon:
   ReadTimeout: 20000
   ConnectTimeout: 20000
+  eureka:
+    enabled: true
 
 zuul:
   ignoredServices: '*'
@@ -14,9 +16,18 @@ zuul:
   routes:
     polldefinition-service:
         path: /definition/**
+        #url: http://polldefinition-service:7878
         serviceId: polldefinition-service
         stripPrefix: false
         sensitiveHeaders:
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://survey-registry:8761/eureka/
 
 server:
   port: 4000

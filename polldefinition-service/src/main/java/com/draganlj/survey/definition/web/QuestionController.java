@@ -3,6 +3,7 @@ package com.draganlj.survey.definition.web;
 import com.draganlj.survey.definition.model.Question;
 import com.draganlj.survey.definition.service.SurveyDefinitionService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/{surveyId}/questions")
 @AllArgsConstructor
+@NoArgsConstructor
 public class QuestionController {
 
     private SurveyDefinitionService service;

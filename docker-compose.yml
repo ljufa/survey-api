@@ -3,6 +3,8 @@ services:
   survey-registry:
     build: survey-registry
     restart: always
+#    ports:
+#      - 8761:8761
     logging:
       options:
         max-size: "10m"
@@ -24,6 +26,8 @@ services:
   polldefinition-service:
     build: polldefinition-service
     restart: always
+#    ports:
+#      - 7878:7878
     depends_on:
       survey-registry:
         condition: service_started
