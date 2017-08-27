@@ -1,5 +1,6 @@
 package com.draganlj.survey.definition.service;
 
+import com.draganlj.survey.definition.dto.QuestionOut;
 import com.draganlj.survey.definition.model.Answer;
 import com.draganlj.survey.definition.model.Question;
 
@@ -7,21 +8,22 @@ import java.util.List;
 
 public interface SurveyDefinitionService {
 
-    void addQuestion(Integer surveyId, Question question);
+    void addQuestion(String surveyId, Question question);
 
-    void updateQuestion(Integer questionId, Question question);
+    void updateQuestion(String questionId, Question question);
 
-    void deleteQuestion(Integer questionId);
+    void deleteQuestion(String questionId);
 
-    Question getQuestion(Integer questionId, boolean fetchAnswers);
 
-    List<Question> getAllQuestions(Integer surveyId, boolean fetchAnswers);
+    QuestionOut getQuestion(String surveyId, int questionOrder, boolean fetchAnswers);
 
-    List<Answer> getAllAnswers(Integer questionId);
+    List<Question> getAllQuestions(String surveyId, boolean fetchAnswers);
 
-    void deleteAnswer(Integer answerId);
+    List<Answer> getAllAnswers(String questionId);
 
-    void updateAnswer(Integer answerId, Answer answer);
+    void deleteAnswer(String answerId);
 
-    void addAnswer(Integer questionId, Answer answer);
+    void updateAnswer(String answerId, Answer answer);
+
+    void addAnswer(String surveyId, Integer questionId, Answer answer);
 }

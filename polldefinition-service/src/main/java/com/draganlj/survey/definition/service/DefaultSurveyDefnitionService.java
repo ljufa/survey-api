@@ -1,9 +1,12 @@
 package com.draganlj.survey.definition.service;
 
+import com.draganlj.survey.definition.dto.QuestionOut;
 import com.draganlj.survey.definition.model.Answer;
 import com.draganlj.survey.definition.model.Question;
+import com.draganlj.survey.definition.model.Survey;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,50 +18,71 @@ import java.util.List;
 public class DefaultSurveyDefnitionService implements SurveyDefinitionService {
 
     @Autowired
-    private QuestionRepository questionRepository;
+    private SurveyRepository surveyRepository;
+
+    @Autowired
+    private AnswerRepository answerRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public void addQuestion(Integer surveyId, Question question) {
+    public void addQuestion(String surveyId, Question question) {
+        Survey survey = surveyRepository.findOne(surveyId);
+        List<Question> questions = survey.getQuestions();
+        question.setId(questions.size());
+        questions.add(question);
+        surveyRepository.save(survey);
+    }
+
+    @Override
+    public void updateQuestion(String questionId, Question question) {
 
     }
 
     @Override
-    public void updateQuestion(Integer questionId, Question question) {
+    public void deleteQuestion(String questionId) {
 
     }
 
     @Override
-    public void deleteQuestion(Integer questionId) {
-
+    public QuestionOut getQuestion(String surveyId, int questionOrder, boolean fetchAnswers) {
+        Question question = surveyRepository.findOne(surveyId).getQuestions().get(questionOrder);
+        QuestionOut questionOut = modelMapper.map(question, QuestionOut.class);
+        if(fetchAnswers){
+           questionOut.setAnswers(answerRepository.findBySurveyIdAndQuestionId(surveyId, questionOrder));
+        }
+        return questionOut;
     }
 
     @Override
-    public Question getQuestion(Integer questionId, boolean fetchAnswers) {
-        return questionRepository.findOne(questionId);
+    public List<Question> getAllQuestions(String surveyId, boolean fetchAnswers) {
+        return surveyRepository.findOne(surveyId).getQuestions();
     }
 
     @Override
-    public List<Question> getAllQuestions(Integer surveyId, boolean fetchAnswers) {
+    public List<Answer> getAllAnswers(String questionId) {
         return null;
     }
 
     @Override
-    public List<Answer> getAllAnswers(Integer questionId) {
-        return null;
-    }
-
-    @Override
-    public void deleteAnswer(Integer answerId) {
+    public void deleteAnswer(String answerId) {
 
     }
 
     @Override
-    public void updateAnswer(Integer answerId, Answer answer) {
+    public void updateAnswer(String answerId, Answer answer) {
 
     }
 
     @Override
-    public void addAnswer(Integer questionId, Answer answer) {
-
+    public void addAnswer(String surveyId, Integer questionId, Answer answer) {
+        if (surveyRepository.exists(surveyId)) {
+            answer.setSurveyId(surveyId);
+            answer.setQuestionId(questionId);
+            answerRepository.insert(answer);
+        } else {
+            // todo: throw exception
+        }
     }
 }

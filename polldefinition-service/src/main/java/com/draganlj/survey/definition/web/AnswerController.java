@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/{questionId}/answer")
+@RequestMapping("/{surveyId}/{questionId}/answers")
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnswerController {
@@ -21,25 +21,25 @@ public class AnswerController {
     private SurveyDefinitionService service;
 
     @PostMapping("/")
-    public ResponseEntity addAnswer(@PathVariable Integer questionId, @Valid @RequestBody Answer answer) {
-        service.addAnswer(questionId, answer);
+    public ResponseEntity addAnswer(@PathVariable String surveyId, @PathVariable Integer questionId, @Valid @RequestBody Answer answer) {
+        service.addAnswer(surveyId, questionId, answer);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{answerId}")
-    public ResponseEntity updateAnswer(@PathVariable Integer answerId, @Valid @RequestBody Answer answer) {
+    public ResponseEntity updateAnswer(@PathVariable String answerId, @Valid @RequestBody Answer answer) {
         service.updateAnswer(answerId, answer);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{answerId}")
-    public ResponseEntity deleteAnswer(@PathVariable Integer answerId) {
+    public ResponseEntity deleteAnswer(@PathVariable String answerId) {
         service.deleteAnswer(answerId);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/")
-    public List<Answer> getAllAnswers(@PathVariable Integer questionId) {
+    public List<Answer> getAllAnswers(@PathVariable String questionId) {
         return service.getAllAnswers(questionId);
     }
 
