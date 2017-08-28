@@ -2,7 +2,6 @@ package com.draganlj.survey.definition.model;
 
 import lombok.Builder;
 import lombok.Data;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,5 +19,6 @@ public class Survey {
     private String author;
     private Date createDate;
     private String surveyTitle;
+    private Boolean started;
     private List<Question> questions = new ArrayList<>();
 }

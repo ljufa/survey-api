@@ -1,15 +1,17 @@
 package com.draganlj.survey.definition.service;
 
-import com.draganlj.survey.definition.dto.QuestionOut;
+import com.draganlj.survey.definition.dto.*;
 import com.draganlj.survey.definition.model.Answer;
 import com.draganlj.survey.definition.model.Question;
 import com.draganlj.survey.definition.model.Survey;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 @Service
@@ -26,46 +28,58 @@ public class DefaultSurveyDefnitionService implements SurveyDefinitionService {
     @Autowired
     private ModelMapper modelMapper;
 
+    private Type questionDtoListType = new TypeToken<List<QuestionIdAndText>>() {
+    }.getType();
+
+    private Type answersDtoListType = new TypeToken<List<AnswerIdAndText>>() {
+    }.getType();
+
+
     @Override
-    public void addQuestion(String surveyId, Question question) {
+    public void addQuestion(String surveyId, QuestionText question) {
         Survey survey = surveyRepository.findOne(surveyId);
         List<Question> questions = survey.getQuestions();
-        question.setId(questions.size());
-        questions.add(question);
+        Question newQuestion = modelMapper.map(question, Question.class);
+        newQuestion.setId(questions.size());
+        questions.add(newQuestion);
         surveyRepository.save(survey);
     }
 
     @Override
-    public void updateQuestion(String questionId, Question question) {
+    public void updateQuestion(String surveyId, Integer questionId, QuestionIdAndText question) {
+        Survey survey = surveyRepository.findOne(surveyId);
+        survey.getQuestions().set(questionId, modelMapper.map(question, Question.class));
+        surveyRepository.save(survey);
+        // todo : make check if there
+    }
+
+    @Override
+    public void deleteQuestion(String surveyId, Integer questionId) {
 
     }
 
     @Override
-    public void deleteQuestion(String questionId) {
-
-    }
-
-    @Override
-    public QuestionOut getQuestion(String surveyId, int questionId, boolean fetchAnswers) {
+    public QuestionAll getQuestion(String surveyId, int questionId, boolean fetchAnswers) {
         List<Question> questions = surveyRepository.findOne(surveyId).getQuestions();
-        if(questions == null && questions.size()<questionId){
+        if (questions == null && questions.size() < questionId) {
             // todo : handle error
         }
         Question question = questions.get(questionId);
-        QuestionOut questionOut = modelMapper.map(question, QuestionOut.class);
-        if(fetchAnswers){
-           questionOut.setAnswers(answerRepository.findBySurveyIdAndQuestionId(surveyId, questionId));
+        QuestionAll questionDto = modelMapper.map(question, QuestionAll.class);
+        if (fetchAnswers) {
+            questionDto.setAnswers(modelMapper.map(answerRepository.findBySurveyIdAndQuestionId(surveyId, questionId), answersDtoListType));
         }
-        return questionOut;
+        return questionDto;
     }
 
     @Override
-    public List<Question> getAllQuestions(String surveyId, boolean fetchAnswers) {
-        return surveyRepository.findOne(surveyId).getQuestions();
+    public List<QuestionIdAndText> getAllQuestions(String surveyId) {
+        List<Question> questions = surveyRepository.findOne(surveyId).getQuestions();
+        return modelMapper.map(questions, questionDtoListType);
     }
 
     @Override
-    public List<Answer> getAllAnswers(String questionId) {
+    public List<AnswerIdAndText> getAllAnswers(String surveyId, Integer questionId) {
         return null;
     }
 
@@ -75,18 +89,19 @@ public class DefaultSurveyDefnitionService implements SurveyDefinitionService {
     }
 
     @Override
-    public void updateAnswer(String answerId, Answer answer) {
+    public void updateAnswer(String answerId, AnswerText answer) {
 
     }
 
     @Override
-    public void addAnswer(String surveyId, Integer questionId, Answer answer) {
+    public void addAnswer(String surveyId, Integer questionId, AnswerText answer) {
         if (surveyRepository.exists(surveyId)) {
-            answer.setSurveyId(surveyId);
-            answer.setQuestionId(questionId);
-            answerRepository.insert(answer);
+            Answer newAnswer = modelMapper.map(answer, Answer.class);
+            newAnswer.setSurveyId(surveyId);
+            newAnswer.setQuestionId(questionId);
+            answerRepository.insert(newAnswer);
         } else {
-            // todo: throw exception
+            // todo: handle error condition
         }
     }
 }

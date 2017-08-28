@@ -1,29 +1,26 @@
 package com.draganlj.survey.definition.service;
 
-import com.draganlj.survey.definition.dto.QuestionOut;
-import com.draganlj.survey.definition.model.Answer;
-import com.draganlj.survey.definition.model.Question;
+import com.draganlj.survey.definition.dto.*;
 
 import java.util.List;
 
 public interface SurveyDefinitionService {
 
-    void addQuestion(String surveyId, Question question);
+    void addQuestion(String surveyId, QuestionText question);
 
-    void updateQuestion(String questionId, Question question);
+    void updateQuestion(String surveyId, Integer questionId, QuestionIdAndText question);
 
-    void deleteQuestion(String questionId);
+    void deleteQuestion(String surveyId, Integer questionId);
 
+    QuestionAll getQuestion(String surveyId, int questionId, boolean fetchAnswers);
 
-    QuestionOut getQuestion(String surveyId, int questionId, boolean fetchAnswers);
+    List<QuestionIdAndText> getAllQuestions(String surveyId);
 
-    List<Question> getAllQuestions(String surveyId, boolean fetchAnswers);
-
-    List<Answer> getAllAnswers(String questionId);
+    List<AnswerIdAndText> getAllAnswers(String surveyId, Integer questionId);
 
     void deleteAnswer(String answerId);
 
-    void updateAnswer(String answerId, Answer answer);
+    void updateAnswer(String answerId, AnswerText answer);
 
-    void addAnswer(String surveyId, Integer questionId, Answer answer);
+    void addAnswer(String surveyId, Integer questionId, AnswerText answer);
 }
