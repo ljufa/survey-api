@@ -16,7 +16,6 @@ zuul:
   routes:
     polldefinition-service:
         path: /definition/**
-        #url: http://polldefinition-service:7878
         serviceId: polldefinition-service
         stripPrefix: false
         sensitiveHeaders:
@@ -27,7 +26,7 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://survey-registry:8761/eureka/
 
 server:
   port: 4000

@@ -6,7 +6,7 @@
  - respond to a survey
  - read the result for a particular question showing the total number of responses and distribution among the 
    possible answers in percent.
-   
+ -   
 # Architectual Decisions #
 
 From required functionalities I identified three groups of usage types:

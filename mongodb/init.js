@@ -1,21 +1,21 @@
-let res = db.createUser({ user: 'user', pwd: 'password', roles: [ {role:'readWrite', db:'survey'} ]})
-
+db.createUser({ user: 'user', pwd: 'password', roles: [ {role:'readWrite', db:'survey'} ]});
+use survey;
 db.surveys.insertOne(
 {
-  "_id":1,
-  "author": "Dragan",
+  "_id": "1",
+  "author": "Dragan Ljubojevic",
   "surveyTitle": "IT Survey",
   "questions": [
     {
-      "_id": 1,
+      "_id": NumberInt(0),
       "questionText": "What is your favorite IDE"
     },
     {
-      "_id": 2,
+      "_id": NumberInt(1),
       "questionText": "What is your favorite programming language"
     },
     {
-      "_id": 3,
+      "_id": NumberInt(2),
       "questionText": "What is your favorite OS"
     }
   ]
@@ -24,60 +24,18 @@ db.surveys.insertOne(
 { upsert: true }
 );
 
-db.answers.insertOne(
-{
-  "_id":1,
-  "author": "Dragan",
-  "surveyTitle": "IT Survey",
-  "questions": [
-    {
-      "_id": 1,
-      "questionText": "What is your favorite IDE"
-    },
-    {
-      "_id": 2,
-      "questionText": "What is your favorite programming language"
-    },
-    {
-      "_id": 3,
-      "questionText": "What is your favorite OS"
-    }
-  ]
-}
-,
-{ upsert: true }
+db.answers.insertMany(
+[
+    {"answerText": "Linux", "surveyId":"1", "questionId":NumberInt(2)},
+    {"answerText": "Windows", "surveyId":"1", "questionId":NumberInt(2)},
+    {"answerText": "MAC OS", "surveyId":"1", "questionId":NumberInt(2)},
+
+    {"answerText": "Java 8", "surveyId":"1", "questionId":NumberInt(1)},
+    {"answerText": "Kotlin", "surveyId":"1", "questionId":NumberInt(1)},
+    {"answerText": "Scala", "surveyId":"1", "questionId":NumberInt(1)},
+
+    {"answerText": "IDEA Intelli J", "surveyId":"1", "questionId":NumberInt(0)},
+    {"answerText": "Eclipse", "surveyId":"1", "questionId":NumberInt(0)},
+    {"answerText": "Netbeans", "surveyId":"1", "questionId":NumberInt(0)},
+]
 );
-
-
-   "answers": [
-        {"answerText": "Linux"},
-        {
-          "answerText": "Windows"
-        },
-        {
-          "answerText": "MAC OS"
-        }
-      ]
-"answers": [
-        {
-          "answerText": "Java"
-        },
-        {
-          "answerText": "Scala"
-        },
-        {
-          "answerText": "Kotlin"
-        }
-      ]
-
-"answers": [
-        {
-          "answerText": "Eclipse"
-        },
-        {
-          "answerText": "IntelliJ Idea"
-        },
-        {
-          "answerText": "NetBeans"
-        }
-      ]

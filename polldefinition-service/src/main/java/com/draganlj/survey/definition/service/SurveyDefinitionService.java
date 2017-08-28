@@ -15,7 +15,7 @@ public interface SurveyDefinitionService {
     void deleteQuestion(String questionId);
 
 
-    QuestionOut getQuestion(String surveyId, int questionOrder, boolean fetchAnswers);
+    QuestionOut getQuestion(String surveyId, int questionId, boolean fetchAnswers);
 
     List<Question> getAllQuestions(String surveyId, boolean fetchAnswers);
 

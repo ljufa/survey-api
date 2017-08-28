@@ -46,11 +46,15 @@ public class DefaultSurveyDefnitionService implements SurveyDefinitionService {
     }
 
     @Override
-    public QuestionOut getQuestion(String surveyId, int questionOrder, boolean fetchAnswers) {
-        Question question = surveyRepository.findOne(surveyId).getQuestions().get(questionOrder);
+    public QuestionOut getQuestion(String surveyId, int questionId, boolean fetchAnswers) {
+        List<Question> questions = surveyRepository.findOne(surveyId).getQuestions();
+        if(questions == null && questions.size()<questionId){
+            // todo : handle error
+        }
+        Question question = questions.get(questionId);
         QuestionOut questionOut = modelMapper.map(question, QuestionOut.class);
         if(fetchAnswers){
-           questionOut.setAnswers(answerRepository.findBySurveyIdAndQuestionId(surveyId, questionOrder));
+           questionOut.setAnswers(answerRepository.findBySurveyIdAndQuestionId(surveyId, questionId));
         }
         return questionOut;
     }
