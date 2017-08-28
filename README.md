@@ -37,3 +37,37 @@ Use eureka for service discovery and ribbon for client side load balancing
 Implement load balancing, service discovery, circuit breaker and other MS deployment patterns in application itself by use of spring-cloud.
 Alternative approach would be container orchestration platform
 ## #7 API versioning ##
+API evolution ...
+
+
+# Build & Run #
+####Prerequisites: 
+- git
+- jdk8
+- maven 3.2 +
+- docker ce 17.0 or higher
+- docker-compose version 1.14.0 or higher
+- if you plan to open code in your IDE please install Lombok plugin.
+
+####Build:
+
+`git clone ????`
+
+`cd survey-api`
+
+`mvn clean package`
+ 
+####Run: 
+ 
+ `docker-compose up -d --build`
+
+After some time API should be accessible on localhost port 80.
+Please note that due to service discovery it could take up to 30 sec before everithing is up.
+ 
+####Stop & clean:
+
+`docker-compose down --rmi local`
+
+# API Documentation #
+Once you run application you can [go to swagger UI](http://localhost/swagger-ui.html)
+for more details
