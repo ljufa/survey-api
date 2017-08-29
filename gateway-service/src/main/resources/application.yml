@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: gateway-service
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+  eureka:
+    enabled: true
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+  routes:
+    authoring-service:
+        path: /authoring/**
+        serviceId: authoring-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://registry-service:8761/eureka/
+
+server:
+  port: 4000

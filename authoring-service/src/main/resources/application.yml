@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: authoring-service
+  data:
+    mongodb:
+      host: localhost
+      username: user
+      password: password
+      database: survey
+      port: 27017
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://registry-service:8761/eureka/
+
+server:
+  context-path: /authoring/
+  port: 7878
+
+logging:
+  level:
+    com.draganlj.survey: DEBUG
+
+api:
+  version: v1

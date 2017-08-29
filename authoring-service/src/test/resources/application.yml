@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      host: authoring-db
+      username: user
+      password: password
+      database: survey
+      port: 27017
+eureka:
+  client:
+    enabled: false
+
+logging:
+  level:
+    com.draganlj.survey: DEBUG

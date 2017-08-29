@@ -10,11 +10,11 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>survey-gateway</module>
-        <module>survey-registry</module>
-        <module>polldefinition-service</module>
-        <module>pollexecution-service</module>
-        <module>pollstatistics-service</module>
+        <module>gateway-service</module>
+        <module>registry-service</module>
+        <module>authoring-service</module>
+        <module>responsecapture-service</module>
+        <module>statistics-service</module>
     </modules>
 
 

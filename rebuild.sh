@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 mvn clean package
-docker-compose down
-docker-compose build
-docker-compose up -d
-docker logs -f survey_polldefinition-service_1
+docker-compose up -d --build
+docker logs -f survey_authoring-service_1
