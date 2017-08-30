@@ -1,4 +1,4 @@
-package com.draganlj.survey.authoring.web;
+package com.draganlj.survey.authoring.api;
 
 import com.draganlj.survey.authoring.dto.AnswerIdAndText;
 import com.draganlj.survey.authoring.dto.AnswerText;
@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/answers")
+@RequestMapping(value = "/answers", headers = {"Accept=application/vnd.survey-1.0+json"})
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnswerController {
@@ -30,14 +30,14 @@ public class AnswerController {
     }
 
     @PatchMapping("/{answerId}")
-    @ApiOperation("Update existing answer")
+    @ApiOperation("TODO: Update existing answer")
     public ResponseEntity updateAnswer(@PathVariable String answerId, @Valid @RequestBody AnswerText answer) {
         service.updateAnswer(answerId, answer);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{answerId}")
-    @ApiOperation("Delete answer")
+    @ApiOperation("TODO: Delete answer")
     public ResponseEntity deleteAnswer(@PathVariable String answerId) {
         service.deleteAnswer(answerId);
         return ResponseEntity.ok().build();

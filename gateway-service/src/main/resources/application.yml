@@ -19,7 +19,11 @@ zuul:
         serviceId: authoring-service
         stripPrefix: false
         sensitiveHeaders:
-
+    resultcapture-service:
+        path: /capture/**
+        serviceId: resultcapture-service
+        stripPrefix: false
+        sensitiveHeaders:
 
 eureka:
   instance:

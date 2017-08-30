@@ -38,6 +38,12 @@ public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
     @Override
     public void addQuestion(String surveyId, QuestionText question) {
         Survey survey = surveyRepository.findOne(surveyId);
+        if(survey.getStarted()){
+            // todo: handle error
+            return;
+        }
+        // todo: do other validation
+
         List<Question> questions = survey.getQuestions();
         Question newQuestion = modelMapper.map(question, Question.class);
         newQuestion.setId(questions.size());
@@ -50,7 +56,7 @@ public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
         Survey survey = surveyRepository.findOne(surveyId);
         survey.getQuestions().set(questionId, modelMapper.map(question, Question.class));
         surveyRepository.save(survey);
-        // todo : make check if there
+
     }
 
     @Override

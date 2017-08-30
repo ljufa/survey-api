@@ -1,12 +1,12 @@
 spring:
   application:
-    name: authoring-service
+    name: resultcapture-service
   data:
     mongodb:
-      host: authoring-db
+      host: capture-db
       username: user
       password: password
-      database: survey
+      database: result
       port: 27017
 eureka:
   instance:
@@ -16,8 +16,8 @@ eureka:
       defaultZone: http://registry-service:8761/eureka/
 
 server:
-  context-path: /authoring/
-  port: 7878
+  context-path: /capture/
+  port: 7979
 
 logging:
   level:

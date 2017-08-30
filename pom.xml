@@ -13,7 +13,7 @@
         <module>gateway-service</module>
         <module>registry-service</module>
         <module>authoring-service</module>
-        <module>responsecapture-service</module>
+        <module>resultcapture-service</module>
         <module>statistics-service</module>
     </modules>
 

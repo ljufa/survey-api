@@ -40,3 +40,22 @@ services:
       - MONGO_INITDB_DATABASE=survey
     ports:
       - 27017:27017
+
+ resultcapture-service:
+    build: resultcapture-service
+    restart: always
+    depends_on:
+      registry-service:
+        condition: service_started
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+ capture-db:
+    build: capture-db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=result
+    ports:
+      - 27019:27017

@@ -1,4 +1,4 @@
-package com.draganlj.survey.authoring.web;
+package com.draganlj.survey.authoring.api;
 
 import com.draganlj.survey.authoring.dto.QuestionAll;
 import com.draganlj.survey.authoring.dto.QuestionIdAndText;
@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/questions/{surveyId}")
+@RequestMapping(value="/questions/{surveyId}", headers = {"Accept=application/vnd.survey-1.0+json"})
 @Api(description = "Basic operations on questions")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,7 +43,7 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{questionId}")
-    @ApiOperation("Remove question from survey")
+    @ApiOperation("TODO: Remove question from survey")
     public ResponseEntity deleteQuestion(@PathVariable String surveyId, @PathVariable Integer questionId) {
         service.deleteQuestion(surveyId, questionId);
         return ResponseEntity.ok().build();
@@ -55,7 +55,7 @@ public class QuestionController {
         return service.getQuestion(surveyId, questionId, true);
     }
 
-    @GetMapping("/")
+    @GetMapping(value="/" )
     @ApiOperation("Return all questions from survey with no answers")
     public List<QuestionIdAndText> getAllQuestions(@PathVariable String surveyId) {
         return service.getAllQuestions(surveyId);
