@@ -1,4 +1,6 @@
 # Requirements #
+Using microservice architecture design and implement api for online survey application such like SurveyMonkey
+Initial set of features is:  
 
  - add/edit/delete questions, answers
  - read a list of all questions
@@ -6,10 +8,9 @@
  - respond to a survey
  - read the result for a particular question showing the total number of responses and distribution among the 
    possible answers in percent.
- -   
+ 
 # Architectual Decisions #
-
-From required functionalities I identified three groups of usage types:
+From given requirements I identified three groups of usage types:
 
 - Poll definition module that is going to be used by survey creators. 
 Expected number of module users (request per sec) is in reasonable order of magnitude. 
@@ -51,18 +52,25 @@ API evolution ...
 
 ####Build:
 
-`git clone ????`
+- `git clone ????`
 
-`cd survey-api`
+- `cd survey-api`
 
-`mvn clean package`
+- `./mvnw clean package`
  
 ####Run: 
  
- `docker-compose up -d --build`
+ - `docker-compose up -d --build`
+ 
+ or
+ 
+ - `./rebuild.sh` - to rebuild and start all services 
+ - `./rebuild.sh <service name>` - to rebuild and start single service
+ - `./rebuild.sh <service name> debug` - to rebuild and start single service in remote debug mode. 
+    See [docker-compose.debug.yml](docker-compose.debug.yml) for debug port mappings. 
 
 After some time API should be accessible on localhost port 80.
-Please note that due to service discovery it could take up to 30 sec before everithing is up.
+Please note that due to service discovery it could take up to 3 hartbeat cycles before each service being discovered.
  
 ####Stop & clean:
 

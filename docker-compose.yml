@@ -1,39 +1,5 @@
 version: '2.1'
 services:
-  registry-service:
-    build: registry-service
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
-  gateway-service:
-    build: gateway-service
-    restart: always
-    depends_on:
-      registry-service:
-        condition: service_started
-    ports:
-      - 80:4000
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
-  authoring-service:
-    build: authoring-service
-    restart: always
-    depends_on:
-      registry-service:
-        condition: service_started
-    ports:
-      - 7879:7879
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
   authoring-db:
     build: authoring-db
     environment:
@@ -43,18 +9,6 @@ services:
     ports:
       - 27017:27017
 
-  resultcapture-service:
-    build: resultcapture-service
-    restart: always
-    depends_on:
-      registry-service:
-        condition: service_started
-    ports:
-      - 7980:7980
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
   capture-db:
     build: capture-db
     environment:
@@ -63,3 +17,72 @@ services:
       - MONGO_INITDB_DATABASE=results
     ports:
       - 27019:27017
+
+  registry-service:
+    build:
+     context: registry-service
+     args:
+       - java_opts=-Xmx256M
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  gateway-service:
+    build:
+     context: gateway-service
+     args:
+       - java_opts=-Xmx256M
+    restart: always
+    depends_on:
+      - registry-service
+    ports:
+      - 80:4000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  authoring-service:
+    build:
+     context: authoring-service
+     args:
+       - java_opts=-Xmx256M
+    restart: always
+    depends_on:
+      - registry-service
+      - authoring-db
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  resultcapture-service:
+    build:
+     context: resultcapture-service
+     args:
+       - java_opts=-Xmx256M
+    restart: always
+    depends_on:
+      - registry-service
+      - capture-db
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  analytics-service:
+    build:
+     context: analytics-service
+     args:
+      - java_opts=-Xmx256M
+    restart: always
+    depends_on:
+      - registry-service
+      - authoring-service
+      - resultcapture-service
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"

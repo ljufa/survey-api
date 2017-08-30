@@ -1,6 +1,7 @@
 package com.draganlj.survey.capture.service;
 
 import com.draganlj.survey.capture.dto.QuestionAnswerDto;
+import com.draganlj.survey.capture.model.QuestionAnswer;
 import com.draganlj.survey.capture.model.SurveyResult;
 import com.draganlj.survey.capture.model.User;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -38,5 +41,12 @@ public class DefaultSurveyCaptureService implements SurveyCaptureService {
                 .submitDate(LocalDateTime.now())
                 .user(user).build();
         resultRepository.insert(newResult);
+    }
+
+    @Override
+    public List<QuestionAnswer> getAnswersOnQuestion(String surveyId, Integer questionId) {
+        // fixme: change mongo document structure to be able to easy query answers
+        List<QuestionAnswer> answersBySurveyId = resultRepository.findAnswersBySurveyId(surveyId);
+        return answersBySurveyId.stream().filter(e -> questionId.equals(e.getQuestionId())).collect(Collectors.toList());
     }
 }

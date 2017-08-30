@@ -24,4 +24,4 @@ logging:
     com.draganlj.survey: DEBUG
 
 api:
-  version: 1.o
+  version: 1.0

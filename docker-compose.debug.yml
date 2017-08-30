@@ -1,0 +1,25 @@
+version: '2.1'
+services:
+  authoring-service:
+    build:
+      context: authoring-service
+      args:
+        - java_opts=-Xmx256M -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7007
+    ports:
+      - 7879:7007
+
+  resultcapture-service:
+    build:
+      context: resultcapture-service
+      args:
+        - java_opts=-Xmx256M -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7007
+    ports:
+      - 7980:7007
+
+  analytics-service:
+    build:
+      context: analytics-service
+      args:
+        - java_opts=-Xmx256M -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7007
+    ports:
+      - 7677:7007

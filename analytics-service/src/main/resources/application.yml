@@ -1,23 +1,19 @@
 spring:
   application:
-    name: resultcapture-service
-  data:
-    mongodb:
-      host: capture-db
-      username: user
-      password: password
-      database: results
-      port: 27017
+    name: analytics-service
 eureka:
   instance:
     prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://registry-service:8761/eureka/
+feign:
+  hystrix:
+    enabled: false
 
 server:
-  context-path: /capture/
-  port: 7979
+  context-path: /analytics/
+  port: 7676
 
 logging:
   level:

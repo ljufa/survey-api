@@ -24,6 +24,11 @@ zuul:
         serviceId: resultcapture-service
         stripPrefix: false
         sensitiveHeaders:
+    analytics-service:
+        path: /analytics/**
+        serviceId: analytics-service
+        stripPrefix: false
+        sensitiveHeaders:
 
 eureka:
   instance:
