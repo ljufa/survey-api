@@ -1,12 +1,14 @@
 package com.draganlj.survey.authoring.service;
 
 import com.draganlj.survey.authoring.dto.*;
+import com.draganlj.survey.authoring.model.Answer;
+import com.draganlj.survey.authoring.model.Question;
 
 import java.util.List;
 
 public interface SurveyAuthoringService {
 
-    void addQuestion(String surveyId, QuestionText question);
+    Question addQuestion(String surveyId, QuestionText question);
 
     void updateQuestion(String surveyId, Integer questionId, QuestionIdAndText question);
 
@@ -22,5 +24,5 @@ public interface SurveyAuthoringService {
 
     void updateAnswer(String answerId, AnswerText answer);
 
-    void addAnswer(String surveyId, Integer questionId, AnswerText answer);
+    Answer addAnswer(String surveyId, Integer questionId, AnswerText answer);
 }

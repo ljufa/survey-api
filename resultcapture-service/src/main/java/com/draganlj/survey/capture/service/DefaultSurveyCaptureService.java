@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
@@ -20,21 +21,22 @@ import java.util.List;
 @Slf4j
 public class DefaultSurveyCaptureService implements SurveyCaptureService {
 
+    @Autowired
     private ModelMapper modelMapper;
+    @Autowired
     private SurveyResultRepository resultRepository;
 
     private Type questionAnsweristType = new TypeToken<List<QuestionAnswerDto>>() {
     }.getType();
 
     @Override
-    public String submitWholeSurvey(User user, List<QuestionAnswerDto> surveyAnswers, String surveyId) {
-
+    public void submitWholeSurvey(User user, List<QuestionAnswerDto> surveyAnswers, String surveyId) {
         SurveyResult newResult = SurveyResult.builder()
-                                            .answers(modelMapper.map(surveyAnswers, questionAnsweristType))
-                                            .surveyId(surveyId)
-                                            .submitDate(LocalDateTime.now())
-                                            .user(user).build();
+                .answers(modelMapper.map(surveyAnswers, questionAnsweristType))
+                .surveyId(surveyId)
+                // todo: make sure you are able to calculate user time!
+                .submitDate(LocalDateTime.now())
+                .user(user).build();
         resultRepository.insert(newResult);
-        return newResult.getId();
     }
 }

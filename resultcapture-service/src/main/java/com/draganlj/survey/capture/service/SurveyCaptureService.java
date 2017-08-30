@@ -6,6 +6,7 @@ import com.draganlj.survey.capture.model.User;
 import java.util.List;
 
 public interface SurveyCaptureService {
-    String submitWholeSurvey(User user, List<QuestionAnswerDto> surveyAnswers, String surveyId);
+
+    void submitWholeSurvey(User user, List<QuestionAnswerDto> surveyAnswers, String surveyId);
 
 }

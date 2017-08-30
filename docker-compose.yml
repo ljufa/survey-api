@@ -27,6 +27,8 @@ services:
     depends_on:
       registry-service:
         condition: service_started
+    ports:
+      - 7879:7879
     logging:
       options:
         max-size: "10m"
@@ -41,7 +43,7 @@ services:
     ports:
       - 27017:27017
 
- resultcapture-service:
+  resultcapture-service:
     build: resultcapture-service
     restart: always
     depends_on:
@@ -51,11 +53,11 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
- capture-db:
+  capture-db:
     build: capture-db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=result
+      - MONGO_INITDB_DATABASE=results
     ports:
       - 27019:27017

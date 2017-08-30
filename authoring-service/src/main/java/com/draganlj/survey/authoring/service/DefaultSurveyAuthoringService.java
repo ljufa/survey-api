@@ -36,11 +36,11 @@ public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
 
 
     @Override
-    public void addQuestion(String surveyId, QuestionText question) {
+    public Question addQuestion(String surveyId, QuestionText question) {
         Survey survey = surveyRepository.findOne(surveyId);
-        if(survey.getStarted()){
+        if (survey.getStarted()) {
             // todo: handle error
-            return;
+            return null;
         }
         // todo: do other validation
 
@@ -49,6 +49,7 @@ public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
         newQuestion.setId(questions.size());
         questions.add(newQuestion);
         surveyRepository.save(survey);
+        return newQuestion;
     }
 
     @Override
@@ -61,7 +62,7 @@ public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
 
     @Override
     public void deleteQuestion(String surveyId, Integer questionId) {
-
+        // todo
     }
 
     @Override
@@ -86,28 +87,31 @@ public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
 
     @Override
     public List<AnswerIdAndText> getAllAnswers(String surveyId, Integer questionId) {
-        return null;
+        return modelMapper.map(answerRepository.findBySurveyIdAndQuestionId(surveyId, questionId), answersDtoListType);
     }
 
     @Override
     public void deleteAnswer(String answerId) {
-
+        answerRepository.delete(answerId);
     }
 
     @Override
     public void updateAnswer(String answerId, AnswerText answer) {
-
+        Answer existingOne = answerRepository.findOne(answerId);
+        existingOne.setAnswerText(answer.getAnswerText());
+        answerRepository.save(existingOne);
     }
 
     @Override
-    public void addAnswer(String surveyId, Integer questionId, AnswerText answer) {
+    public Answer addAnswer(String surveyId, Integer questionId, AnswerText answer) {
         if (surveyRepository.exists(surveyId)) {
             Answer newAnswer = modelMapper.map(answer, Answer.class);
             newAnswer.setSurveyId(surveyId);
             newAnswer.setQuestionId(questionId);
-            answerRepository.insert(newAnswer);
+            return answerRepository.insert(newAnswer);
         } else {
             // todo: handle error condition
         }
+        return null;
     }
 }

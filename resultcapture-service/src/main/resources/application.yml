@@ -6,7 +6,7 @@ spring:
       host: capture-db
       username: user
       password: password
-      database: result
+      database: results
       port: 27017
 eureka:
   instance:

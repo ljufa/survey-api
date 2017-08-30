@@ -14,7 +14,7 @@
         <module>registry-service</module>
         <module>authoring-service</module>
         <module>resultcapture-service</module>
-        <module>statistics-service</module>
+        <module>analytics-service</module>
     </modules>
 
 

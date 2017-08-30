@@ -9,11 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AnonumousUser implements User {
 
-    private String userInfo;
-    private String ipAddress;
+    private String uniqueId;
 
-    @Override
-    public String getUniqueId() {
-        return userInfo + "/" + ipAddress;
-    }
 }

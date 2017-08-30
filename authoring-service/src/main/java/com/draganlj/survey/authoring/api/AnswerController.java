@@ -2,15 +2,21 @@ package com.draganlj.survey.authoring.api;
 
 import com.draganlj.survey.authoring.dto.AnswerIdAndText;
 import com.draganlj.survey.authoring.dto.AnswerText;
+import com.draganlj.survey.authoring.model.Answer;
 import com.draganlj.survey.authoring.service.SurveyAuthoringService;
+import com.netflix.client.http.HttpResponse;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -23,17 +29,17 @@ public class AnswerController {
     private SurveyAuthoringService service;
 
     @PostMapping("/{surveyId}/{questionId}")
-    @ApiOperation("Add new answer to the question")
+    @ApiOperation(value = "Add new answer to the question",code = HttpServletResponse.SC_CREATED)
     public ResponseEntity addAnswer(@PathVariable String surveyId, @PathVariable Integer questionId, @Valid @RequestBody AnswerText answer) {
-        service.addAnswer(surveyId, questionId, answer);
-        return ResponseEntity.ok().build();
+        Answer saved = service.addAnswer(surveyId, questionId, answer);
+        return ResponseEntity.created(getUri(saved.getId())).build();
     }
 
-    @PatchMapping("/{answerId}")
-    @ApiOperation("TODO: Update existing answer")
+    @PutMapping("/{answerId}")
+    @ApiOperation(value = "TODO: Update existing answer", code = HttpServletResponse.SC_NO_CONTENT)
     public ResponseEntity updateAnswer(@PathVariable String answerId, @Valid @RequestBody AnswerText answer) {
         service.updateAnswer(answerId, answer);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{answerId}")
@@ -49,4 +55,9 @@ public class AnswerController {
         return service.getAllAnswers(surveyId, questionId);
     }
 
+    private URI getUri(String id) {
+        return ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(id).toUri();
+    }
 }

@@ -12,6 +12,7 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -46,8 +47,9 @@ public class SurveyCaptureApplication {
 
     private ApiInfo metadata() {
         return new ApiInfoBuilder()
-                .title("Survey authoring API")
-                .description("Operations on this API allows you to create syrvey with answers and questions.")
+                .title("Survey submission API")
+                .description("Operations on this API allows you to capture results of survey submission.")
+                .contact(new Contact("Dragan Ljubojevic","", "dragan.ljubojevic@gmail.com"))
                 .version(apiVersion)
                 .build();
     }
