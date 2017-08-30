@@ -28,10 +28,10 @@ public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
     @Autowired
     private ModelMapper modelMapper;
 
-    private Type questionDtoListType = new TypeToken<List<QuestionIdAndText>>() {
+    private final Type questionDtoListType = new TypeToken<List<QuestionIdAndText>>() {
     }.getType();
 
-    private Type answersDtoListType = new TypeToken<List<AnswerIdAndText>>() {
+    private final Type answersDtoListType = new TypeToken<List<AnswerIdAndText>>() {
     }.getType();
 
 

@@ -1,6 +1,5 @@
 package com.draganlj.survey.gateway;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -17,19 +16,19 @@ public class DocumentationController implements SwaggerResourcesProvider {
 
 
     @Override
-    public List get() {
-        List resources = new ArrayList<>();
+    public List<SwaggerResource> get() {
+        List<SwaggerResource> resources = new ArrayList<>();
         resources.add(swaggerResource("authoring-service", "/authoring/v2/api-docs", "1.0"));
         resources.add(swaggerResource("resultcapture-service", "/capture/v2/api-docs", "1.0"));
         return resources;
     }
- 
-    private SwaggerResource swaggerResource(String name, String location, String version) {
+
+    private static SwaggerResource swaggerResource(String name, String location, String version) {
         SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);
         swaggerResource.setLocation(location);
         swaggerResource.setSwaggerVersion(version);
         return swaggerResource;
     }
- 
+
 }

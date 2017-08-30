@@ -49,7 +49,7 @@ public class SurveyAuthoringApplication {
         return new ApiInfoBuilder()
                 .title("Survey authoring API")
                 .description("Operations on this API allows you to create syrvey with answers and questions.")
-                .contact(new Contact("Dragan Ljubojevic","", "dragan.ljubojevic@gmail.com"))
+                .contact(new Contact("Dragan Ljubojevic", "", "dragan.ljubojevic@gmail.com"))
                 .version(apiVersion)
                 .build();
     }

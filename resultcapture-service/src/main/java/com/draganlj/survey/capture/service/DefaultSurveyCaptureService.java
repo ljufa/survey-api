@@ -26,7 +26,7 @@ public class DefaultSurveyCaptureService implements SurveyCaptureService {
     @Autowired
     private SurveyResultRepository resultRepository;
 
-    private Type questionAnsweristType = new TypeToken<List<QuestionAnswerDto>>() {
+    private final Type questionAnsweristType = new TypeToken<List<QuestionAnswerDto>>() {
     }.getType();
 
     @Override

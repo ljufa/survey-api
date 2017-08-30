@@ -49,7 +49,7 @@ public class SurveyCaptureApplication {
         return new ApiInfoBuilder()
                 .title("Survey submission API")
                 .description("Operations on this API allows you to capture results of survey submission.")
-                .contact(new Contact("Dragan Ljubojevic","", "dragan.ljubojevic@gmail.com"))
+                .contact(new Contact("Dragan Ljubojevic", "", "dragan.ljubojevic@gmail.com"))
                 .version(apiVersion)
                 .build();
     }

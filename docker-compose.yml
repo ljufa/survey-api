@@ -49,6 +49,8 @@ services:
     depends_on:
       registry-service:
         condition: service_started
+    ports:
+      - 7980:7980
     logging:
       options:
         max-size: "10m"
