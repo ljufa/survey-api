@@ -33,7 +33,7 @@ public class DefaultSurveyAuthoringServiceTest {
     @Mock
     private AnswerRepository answerRepository;
 
-    private ModelMapper modelMapper = new ModelMapper();
+    private final ModelMapper modelMapper = new ModelMapper();
 
     private DefaultSurveyAuthoringService service;
 
