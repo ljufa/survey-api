@@ -6,6 +6,7 @@ import lombok.Data;
 public class QuestionAnswer {
 
     private String surveyResultId;
+    private String surveyId;
     private Integer questionId;
     private String[] answerIds;
 

@@ -34,14 +34,14 @@ public class AnswerController {
     }
 
     @PutMapping("/{answerId}")
-    @ApiOperation(value = "TODO: Update existing answer", code = HttpServletResponse.SC_NO_CONTENT)
+    @ApiOperation(value = "Update existing answer", code = HttpServletResponse.SC_NO_CONTENT)
     public ResponseEntity<?> updateAnswer(@PathVariable String answerId, @Valid @RequestBody AnswerText answer) {
         service.updateAnswer(answerId, answer);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{answerId}")
-    @ApiOperation("TODO: Delete answer")
+    @ApiOperation("Delete answer")
     public ResponseEntity<?> deleteAnswer(@PathVariable String answerId) {
         service.deleteAnswer(answerId);
         return ResponseEntity.ok().build();

@@ -41,7 +41,7 @@ public class QuestionController {
 
     @PutMapping("/{questionId}")
     @ApiOperation(value = "Update existing question in survey", code = HttpServletResponse.SC_NO_CONTENT)
-    public ResponseEntity<?> updateQuestion(@PathVariable String surveyId, @PathVariable Integer questionId, @Valid @RequestBody QuestionIdAndText question) {
+    public ResponseEntity<?> updateQuestion(@PathVariable String surveyId, @PathVariable Integer questionId, @Valid @RequestBody QuestionText question) {
         service.updateQuestion(surveyId, questionId, question);
         return ResponseEntity.noContent().build();
     }

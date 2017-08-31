@@ -11,7 +11,7 @@ import java.util.List;
 @FeignClient(name = "resultcapture-service")
 public interface ResultCaptureServiceClient {
 
-	@RequestMapping(method = RequestMethod.GET, value = "/results")
-	List<QuestionAnswer> getAnswersOnQuestion(@PathVariable("surveyId") String surveyId, @PathVariable("questionId") Integer questionId);
+    @RequestMapping(method = RequestMethod.GET, value = "/capture/results/{surveyId}/{questionId}")
+    List<QuestionAnswer> getAnswersOnQuestion(@PathVariable("surveyId") String surveyId, @PathVariable("questionId") Integer questionId);
 
 }

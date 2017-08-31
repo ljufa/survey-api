@@ -1,11 +1,10 @@
 db.createUser({ user: 'user', pwd: 'password', roles: [ {role:'readWrite', db:'survey'} ]});
-//use survey;
 db.surveys.insertOne(
 {
   "_id": "1",
   "author": "Dragan Ljubojevic",
   "surveyTitle": "IT Survey",
-  "started": false,
+  "published": false,
   "questions": [
     {
       "_id": NumberInt(0),

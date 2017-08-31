@@ -10,36 +10,47 @@ Initial set of features is:
    possible answers in percent.
  
 # Architectual Decisions #
+In order to be able to scale applicaton for high trafic volume I will use Microservice Arhitecture pattern.
+With help of well known and adopted tools development, deployment and day to day running process should be smooth.
+  
+## #1 Microservices organization ##
 From given requirements I identified three groups of usage types:
 
-- Poll definition module that is going to be used by survey creators. 
-Expected number of module users (request per sec) is in reasonable order of magnitude. 
-- Poll execution module that is going to provide questions, accept and store actual answers. 
-Expected number of module users is much higher than in previous case.
-- Poll statistic module is going to provide different statistical aggregations based on actual answers. 
+- AUTHORING-SERVICE: Survey authoring module that is going to be used by survey creators. 
+Expected number of module users (request per sec) is in reasonable order of magnitude.
+This module will also provide questions and anwers at survey beginning.
+ 
+- RESULTCAPTURE-SERVICE: Survey result capture module that is going accept and store actual answers. 
+Expected number of requests in this module is much higher than in the previous case.
+
+- ANALYTICS-SERVICE: Analytics module will  provide different statistical aggregations based on actual answers. 
 This module is going to be used by first group of users or/and survey owners. 
 This group of users is also much smaller than second one.
 
-## #1 Microservices organization ##
-Create 3 microservice one for each use case: poll definition, poll exectuion and poll statistics.
-Each service will have its own mongo database instance. 
-In the case that service needs data from the other service db it will be fetched from data owning service.
-I.E. When execution service needs poll definition it will invoke definition service to fetch data.
+From all above I can make assumption that each module will have different scaling needs so decided to design them as separate microservices.
+
 ## #2 Data persistence ##
+Each service will have its own mongo database instance.
+Exceptions from this is first iteration of ANALYTICS-SERVICE which is going to pull data from other two services on the fly.
+In future iterations we can implement it in more robust and scalable way to be able to support big and fast data analytics in realtime.
+(Spark, Kafka ...) 
 
 ## #3 Data exchange ##
-If data can't be fetched from other service mongodb replication will be used. 
-In that case data copy must be used in readonly mode.
-## #4 Client-service and service-service communication ##
-Use synchronous service communication becuse of better cloud tools support (spring streams  cloud or spring 5 reactive is still immature)
-## #5 Service discovery, load balancing and circuit breakers ##
-Use eureka for service discovery and ribbon for client side load balancing
-## #6 Scaling ##
-Implement load balancing, service discovery, circuit breaker and other MS deployment patterns in application itself by use of spring-cloud.
-Alternative approach would be container orchestration platform
-## #7 API versioning ##
-API evolution ...
+JSON is data format used for communication between client and server as well as inter-service communication.
 
+## #4 Client-service and service-service communication ##
+Use synchronous service communication becuse of better cloud tools support at the moment
+(spring streams  cloud or spring 5 reactive is still immature)
+
+## #5 Service discovery, load balancing and circuit breakers ##
+Use eureka for service discovery and ribbon for client side load balancing.
+
+## #6 Scaling ##
+For autoscaling, self healing I'll relly on cloud provider platform such is Kubernetes.
+
+## #7 API versioning ##
+To be able to support smoth API evolution api versioning is going to be in place from the start.
+Versioning method of choice is usage of Accept header in each request (Accept=application/vnd.survey-1.0+json)
 
 # Build & Run #
 ####Prerequisites: 
@@ -79,3 +90,10 @@ Please note that due to service discovery it could take up to 3 hartbeat cycles 
 # API Documentation #
 Once you run application you can [go to swagger UI](http://localhost/swagger-ui.html)
 for more details
+
+# Logging & Monitoring #
+TBD
+
+# Testing #
+TBD
+
