@@ -1,6 +1,5 @@
 package com.draganlj.survey.authoring.service;
 
-import com.draganlj.survey.authoring.ValidationException;
 import com.draganlj.survey.authoring.dto.*;
 import com.draganlj.survey.authoring.model.Answer;
 import com.draganlj.survey.authoring.model.Question;

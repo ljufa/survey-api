@@ -31,7 +31,7 @@ public class ResultsController {
     private UserService userService;
 
     @GetMapping("/{questionId}")
-    @ApiOperation(value = "Get all responses on single question.")
+    @ApiOperation("Get all responses on single question.")
     public List<QuestionAnswer> getAnswersOnQuestion(@PathVariable String surveyId, @PathVariable Integer questionId) {
         return captureService.getAnswersOnQuestion(surveyId, questionId);
 
