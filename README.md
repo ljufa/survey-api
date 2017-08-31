@@ -41,6 +41,7 @@ From all above I can make assumption that each module will have different scalin
 so decided to design them as separate services.
  
 In addition to mentioned services two more technical services are going to be used:
+
 - GATEWAY-SERVICE: for dynamic request routing, security, monitoring...
 - REGISTRY-SERVICE: for service discovery 
  
