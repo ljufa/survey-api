@@ -1,7 +1,8 @@
 # Requirements #
 Using microservice architecture make api for online survey application like SurveyMonkey.
 
-Initial set of features would be:  
+Initial set of features would be: 
+
  - add/edit/delete questions, answers
  - read a list of all questions
  - read a question with all answers
@@ -41,6 +42,7 @@ From all above I can make assumption that each module will have different scalin
 so decided to design them as separate services.
  
 In addition to mentioned services two more technical services are going to be used:
+
 - GATEWAY-SERVICE: for dynamic request routing, security, monitoring...
 - REGISTRY-SERVICE: for service discovery 
  
@@ -61,7 +63,7 @@ Use synchronous service communication because of better cloud tools support at t
 Use Netflix Eureka for service discovery and Ribbon for client side load balancing and Zuul for request routing.
 For auto scaling, self healing I'll relay on cloud provider platform such is Kubernetes.
 
-## #7 API versioning ##
+## #5 API versioning ##
 To be able to support smooth API api evolution versioning is going to be in place from the start.
 Versioning method of choice is use of Accept header in each request `Accept=application/vnd.survey-1.0+json`
 
@@ -77,9 +79,7 @@ Versioning method of choice is use of Accept header in each request `Accept=appl
 ####Build:
 
 - `git clone https://ljufa@bitbucket.org/ljufa/survey.git`
-
 - `cd survey`
-
 - `./mvnw clean package`
  
 ####Run: 
