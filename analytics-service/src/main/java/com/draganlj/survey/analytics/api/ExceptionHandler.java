@@ -1,5 +1,6 @@
-package com.draganlj.survey.analytics;
+package com.draganlj.survey.analytics.api;
 
+import com.draganlj.survey.analytics.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

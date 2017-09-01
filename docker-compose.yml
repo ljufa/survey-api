@@ -1,5 +1,6 @@
 version: '2.1'
 services:
+  ## DB instances ##
   authoring-db:
     build: authoring-db
     environment:
@@ -18,6 +19,7 @@ services:
     ports:
       - 27019:27017
 
+  ## Infrastructure services  ##
   registry-service:
     build:
      context: registry-service
@@ -44,6 +46,7 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  ## Application services ##
   authoring-service:
     build:
      context: authoring-service
