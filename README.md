@@ -108,4 +108,6 @@ for more details
 TBD
 
 # Testing #
+[![codecov](https://codecov.io/gh/ljufa/survey-api/branch/master/graph/badge.svg)](https://codecov.io/gh/ljufa/survey-api)
+
 TBD
