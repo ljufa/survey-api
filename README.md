@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/ljufa/survey-api.svg?branch=master)](https://travis-ci.org/ljufa/survey-api)
+[![codecov](https://codecov.io/gh/ljufa/survey-api/branch/master/graph/badge.svg)](https://codecov.io/gh/ljufa/survey-api)
+
 # Requirements #
 Using microservice architecture make api for online survey application like SurveyMonkey.
 
@@ -108,6 +111,5 @@ for more details
 TBD
 
 # Testing #
-[![codecov](https://codecov.io/gh/ljufa/survey-api/branch/master/graph/badge.svg)](https://codecov.io/gh/ljufa/survey-api)
 
 TBD
