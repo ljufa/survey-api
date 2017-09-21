@@ -41,8 +41,7 @@ public class SurveyAuthoringApplication {
         //noinspection Guava
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(Predicates.not(PathSelectors.regex("/error.*")))
+                .apis(RequestHandlerSelectors.basePackage("com.draganlj.survey.authoring"))
                 .build().apiInfo(metadata());
     }
 
