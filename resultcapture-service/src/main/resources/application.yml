@@ -8,12 +8,23 @@ spring:
       password: password
       database: results
       port: 27017
+  rabbitmq:
+    host: rabbitmq
+
 eureka:
   instance:
     prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://registry-service:8761/eureka/
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
 
 server:
   context-path: /capture/

@@ -27,6 +27,7 @@ public class InMemoryStatisticalService implements StatisticsService {
 
     @Override
     public QuestionStatistics getQuestionStatistics(String surveyId, Integer questionId) {
+        log.debug("Invoke question statistic surveyid={}, questionid={}", surveyId, questionId);
         Question questionWithAnswers = authoringServiceClient.getQuestionWithAnswers(surveyId, questionId);
         List<QuestionAnswer> answersOnQuestion = captureServiceClient.getAnswersOnQuestion(surveyId, questionId);
         Map<String, Long> distributionMap = answersOnQuestion.stream()

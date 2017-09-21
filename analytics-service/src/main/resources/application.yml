@@ -1,15 +1,26 @@
 spring:
   application:
     name: analytics-service
+  rabbitmq:
+    host: rabbitmq
+
 eureka:
   instance:
     prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://registry-service:8761/eureka/
-feign:
-  hystrix:
-    enabled: false
+#feign:
+#  hystrix:
+#    enabled: false
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
 
 server:
   context-path: /analytics/

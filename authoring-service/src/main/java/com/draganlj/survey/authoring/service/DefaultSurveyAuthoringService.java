@@ -7,6 +7,7 @@ import com.draganlj.survey.authoring.model.Question;
 import com.draganlj.survey.authoring.model.Survey;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -21,6 +22,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
+@Slf4j
 public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
 
     @Autowired
@@ -70,6 +72,7 @@ public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
 
     @Override
     public QuestionAll getQuestion(@NotEmpty String surveyId, @NotNull Integer questionId, boolean fetchAnswers) {
+        log.debug("Invoke get question surveyid={}, questionid={}", surveyId, questionId);
         Survey survey = surveyRepository.findOne(surveyId);
         validate(survey, questionId);
         List<Question> questions = survey.getQuestions();

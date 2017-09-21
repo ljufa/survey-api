@@ -57,6 +57,7 @@ public class DefaultSurveyCaptureService implements SurveyCaptureService {
 
     @Override
     public List<QuestionAnswer> getAnswersOnQuestion(@NotEmpty String surveyId, @NotNull Integer questionId) {
+        log.debug("Invoke getAnswersOnQuestion statistic surveyid={}, questionid={}", surveyId, questionId);
         return answerRepository.findBySurveyIdAndQuestionId(surveyId, questionId);
     }
 }
