@@ -6,39 +6,40 @@ Using microservice architecture make api for online survey application like Surv
 
 Initial set of features would be: 
 
- - add/edit/delete questions, answers
- - read a list of all questions
- - read a question with all answers
- - respond to a survey
- - read the result for a particular question showing the total number of responses and distribution among the 
+ * add/edit/delete questions, answers
+ * read a list of all questions
+ * read a question with all answers
+ * respond to a survey
+ * read the result for a particular question showing the total number of responses and distribution among the
    possible answers in percent.
  
 = Architectual Decisions
 To be able to scale application for high traffic volumes I will use Microservice Architecture pattern.
 Such architecture with help of well known and adopted tools should make development, 
 deployment and day to day running processes smooth.
-  
+
 == 1. Microservices organization
+
 From given features I identified three groups of usages:
 
-- AUTHORING-SERVICE: Survey authoring module that is going to be used by survey creators. 
+* AUTHORING-SERVICE: Survey authoring module that is going to be used by survey creators.
 Expected number of module users (request per sec) is in reasonable order of magnitude.
 This module will also provide questions and answers at survey beginning.
 Features in this module:
-    - add/edit/delete questions, answers
-    - read a list of all questions
-    - read a question with all answers
+** add/edit/delete questions, answers
+** read a list of all questions
+** read a question with all answers
  
-- RESULTCAPTURE-SERVICE: Survey result capture module that is going accept and store actual answers. 
+* RESULTCAPTURE-SERVICE: Survey result capture module that is going accept and store actual answers.
 Expected number of requests in this module is much higher than in the previous case.
 Features in this module:
-    - respond to a survey
+** respond to a survey
 
-- ANALYTICS-SERVICE: Analytics module will provide different statistical aggregations based on actual answers. 
+* ANALYTICS-SERVICE: Analytics module will provide different statistical aggregations based on actual answers.
 This module is going to be used by first group of users or/and survey owners. 
 This group of users is also much smaller than second one.
 Features in this module:
-    - read the result for a particular question showing the total number of responses and distribution among the 
+** read the result for a particular question showing the total number of responses and distribution among the
         possible answers in percent.
 
 From all above I can make assumption that each module will have different scaling needs 
@@ -46,8 +47,8 @@ so decided to design them as separate services.
  
 In addition to mentioned services two more technical services are going to be used:
 
-- GATEWAY-SERVICE: for dynamic request routing, security, monitoring...
-- REGISTRY-SERVICE: for service discovery 
+* GATEWAY-SERVICE: for dynamic request routing, security, monitoring...
+* REGISTRY-SERVICE: for service discovery
  
 
 == 2. Data persistence
@@ -73,28 +74,26 @@ Versioning method of choice is use of Accept header in each request `Accept=appl
 
 = Build & Run
 ==== Prerequisites:
-- git
-- jdk8
-- maven 3.2 +
-- docker ce 17.0 or higher
-- docker-compose version 1.14.0 or higher
-- if you plan to open code in your IDE please install Lombok plugin.
+* git
+* jdk8
+* maven 3.2 +
+* docker ce 17.0 or higher
+* docker-compose version 1.14.0 or higher
+* if you plan to open code in your IDE please install Lombok plugin.
 
 ==== Build:
 
-- `git clone https://ljufa@bitbucket.org/ljufa/survey.git`
-- `cd survey`
-- `./mvnw clean package`
+* `git clone https://ljufa@bitbucket.org/ljufa/survey.git`
+* `cd survey`
+* `./mvnw clean package`
  
 ==== Run:
  
- - `docker-compose up -d --build` - to run all services for the first time
- 
+ * `docker-compose up -d --build` - to run all services for the first time
  or use utility script
- 
- - `./rebuild.sh` - to rebuild and restart all services 
- - `./rebuild.sh <service name>` - to rebuild and restart single service
- - `./rebuild.sh <service name> debug` - to rebuild and restart single service in remote debug mode. 
+ * `./rebuild.sh` - to rebuild and restart all services
+ * `./rebuild.sh <service name>` - to rebuild and restart single service
+ * `./rebuild.sh <service name> debug` - to rebuild and restart single service in remote debug mode.
     See [docker-compose.debug.yml](docker-compose.debug.yml) for debug port mappings. 
 
 After some time API should be accessible on localhost port 80.
@@ -105,15 +104,16 @@ Please note that due to service discovery it could take up to 3 heartbeat cycles
 `docker-compose down --rmi local`
 
 = API Documentation
-Once you run application you can [go to swagger UI](http://localhost/swagger-ui.html)
+Once you run application you can http://localhost/swagger-ui.html[go to swagger UI]
 for more details
 
 = Logging & Monitoring
 For distrubuted log tracing we will enable spring sleuth to collect span id and send it to the zipkin server over rabittmq.
 
-  - Hystrix dashboard is available at http://localhost:9090/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A8989[http://localhost:9090/hystrix]
-  - Zipkin log analyzer UI iz available at http://localhost:8888/[http://localhost:8888]
-  - Rabbit MQ UI at http://localhost:15672 (guest/guest)
+  * Hystrix dashboard is available at http://localhost:9090/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A8989[http://localhost:9090/hystrix]
+  * Zipkin log analyzer UI iz available at http://localhost:8888/[http://localhost:8888]
+  * Rabbit MQ UI at http://localhost:15672 (guest/guest)
+  * Eureka registry UI is here http://localhost:8761/
 
 = Testing
 

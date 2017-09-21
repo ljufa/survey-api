@@ -1,6 +1,9 @@
 spring:
   application:
     name: registry-service
+  sleuth:
+    sampler:
+      percentage: 1
 
 hystrix:
   command:

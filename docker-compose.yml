@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.3'
 services:
   rabbitmq:
     image: rabbitmq:3-management
@@ -36,6 +36,8 @@ services:
      args:
        - java_opts=-Xmx256M
     restart: always
+    ports:
+      - 8761:8761
     logging:
       options:
         max-size: "10m"
@@ -97,7 +99,6 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
-
   resultcapture-service:
     build:
      context: resultcapture-service

@@ -3,6 +3,9 @@ spring:
     name: analytics-service
   rabbitmq:
     host: rabbitmq
+  sleuth:
+    sampler:
+      percentage: 1
 
 eureka:
   instance:
