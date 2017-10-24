@@ -1,4 +1,4 @@
-FROM java:8-jre
+FROM openjdk:9-jre-slim
 MAINTAINER Dragan Ljubojevic <dragan.ljubojevic@gmail.com>
 ADD ./target/authoring-service.jar /app/
 ARG java_opts
