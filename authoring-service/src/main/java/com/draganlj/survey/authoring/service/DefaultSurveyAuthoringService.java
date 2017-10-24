@@ -129,6 +129,7 @@ public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
     }
 
     // todo: implement better and more flexible/reusable validation by using spring custom validators
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private static Survey validate(Optional<Survey> input) {
         if (!input.isPresent()) {
             throw new ValidationException(String.format("Survey [%s] could not be found", input));
@@ -140,6 +141,7 @@ public class DefaultSurveyAuthoringService implements SurveyAuthoringService {
         return result;
     }
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private static Survey validate(Optional<Survey> input, Integer questionId) {
         Survey survey = validate(input);
         List<Question> questions = survey.getQuestions();
